@@ -1,0 +1,12 @@
+<div *ngIf="!areAllPopped">
+    <ng-container name="masksContainer" *ngFor="let bubble of listBubbles; let i = index">
+        <img *ngIf="bubble.isPopped" src="../../assets/img/popped.png"/>
+        <img *ngIf="!bubble.isPopped" src="../../assets/img/bubble.png" (click)="pop(bubble)"/>
+    </ng-container>
+</div>
+
+<div *ngIf="areAllPopped" style="display: flex;
+justify-content: center;
+align-items: center;">
+    <img src="assets/img/again.jpg" (click)="playAgain()" matTooltip="Click to play again"/>
+</div>
