@@ -1,8 +1,16 @@
-<div *ngIf="!areAllPopped">
-    <ng-container name="masksContainer" *ngFor="let bubble of listBubbles; let i = index">
-        <img *ngIf="bubble.isPopped" src="../../assets/img/popped.png"/>
-        <img *ngIf="!bubble.isPopped" src="../../assets/img/bubble.png" (click)="pop(bubble)"/>
-    </ng-container>
+<div
+  #container
+  *ngIf="!areAllPopped"
+  class="bubble-grid"
+  [ngStyle]="{ 'grid-template-columns': 'repeat(' + columns + ', ' + bubbleSize + 'px)' }"
+>
+  <img
+    *ngFor="let bubble of listBubbles"
+    [src]="bubble.isPopped ? 'assets/img/popped.png' : 'assets/img/bubble.png'"
+    (click)="!bubble.isPopped && pop(bubble)"
+    [class.popped]="bubble.isPopped"
+    class="bubble"
+  />
 </div>
 
 <div *ngIf="areAllPopped" style="display: flex;

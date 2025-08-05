@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { BubbleObj } from '../models/bubbleObj copy';
 
 @Component({
@@ -18,22 +18,48 @@ export class BubbleWrapComponent {
   // 60*60 px
   bubbleSize: number = 60;
 
+  columns: number = 0;
+
+  @ViewChild('container') containerRef!: ElementRef<HTMLDivElement>;
+
   constructor(
   ) {
-    var screenHeight = window.innerHeight * 0.9;
-    var screenWidth = window.innerWidth;
-    this.numberOfBubbles = Math.floor(screenHeight / this.bubbleSize) * Math.floor(screenWidth / this.bubbleSize);
-
     this.listBubbles = new Array(this.numberOfBubbles).fill(null).map(() => new BubbleObj());
   }
 
-  async ngOnInit() {
-    
+  ngAfterViewInit() {
+    const gap = 4; // он должен совпадать с CSS
+    const totalBubbleSize = this.bubbleSize + gap;
+
+    const containerEl = this.containerRef.nativeElement;
+    const { width, height } = containerEl.getBoundingClientRect();
+
+    debugger;
+    const safeOffset = 8;
+    const availableHeight = height - safeOffset; // важный момент
+    const cols = Math.floor(width / totalBubbleSize);
+    const rows = Math.floor(availableHeight / totalBubbleSize);
+
+    this.columns = cols;
+    this.numberOfBubbles = cols * rows;
+
+    this.listBubbles = new Array(this.numberOfBubbles).fill(null).map(() => new BubbleObj());
+    let killerIndex = Math.floor(Math.random() * this.numberOfBubbles);
+    this.listBubbles[killerIndex].isKiller = true;
   }
 
   pop(bubble: BubbleObj) {
+    if (bubble.isKiller) {
+      this.listBubbles.forEach(b => b.isPopped = true);
+
+      setTimeout(() => {
+        this.areAllPopped = true;
+      }, 500);
+      return;
+    }
+    
     let audio = new Audio();
-    audio.src =  "../assets/bubble-wrap-1.mp3";
+    audio.src =  "assets/bubble-wrap-1.mp3";
     audio.load();
     audio.play();
     bubble.isPopped = true;

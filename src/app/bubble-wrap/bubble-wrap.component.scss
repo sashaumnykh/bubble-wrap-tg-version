@@ -1,0 +1,20 @@
+.bubble-grid {
+  display: grid;
+  gap: 4px;
+  justify-content: center;
+  align-content: center;
+  height: calc(100vh - 4px);    
+  overflow: hidden;
+}
+
+.bubble {
+  width: 60px;
+  height: 60px;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.bubble.popped {
+  opacity: 0.4;
+  transform: scale(1.2);
+}
