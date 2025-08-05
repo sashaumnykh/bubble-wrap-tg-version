@@ -23,6 +23,10 @@ git clone https://github.com/yourusername/bubble-wrap.git
 cd bubble-wrap
 npm install
 ng serve
+
+ИЛИ
+
+git pages: https://sashaumnykh.github.io/bubble-wrap/
 ```
 
 ---
