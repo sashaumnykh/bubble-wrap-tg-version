@@ -15,7 +15,6 @@ export class BubbleWrapComponent {
   numberOfBubbles: number = 0;
   areAllPopped: boolean = false;
 
-  // 60*60 px
   bubbleSize: number = 60;
 
   columns: number = 0;
@@ -28,7 +27,7 @@ export class BubbleWrapComponent {
   }
 
   ngAfterViewInit() {
-    const gap = 4; // он должен совпадать с CSS
+    const gap = 4;
     const totalBubbleSize = this.bubbleSize + gap;
 
     const containerEl = this.containerRef.nativeElement;
@@ -36,7 +35,7 @@ export class BubbleWrapComponent {
 
     debugger;
     const safeOffset = 8;
-    const availableHeight = height - safeOffset; // важный момент
+    const availableHeight = height - safeOffset;
     const cols = Math.floor(width / totalBubbleSize);
     const rows = Math.floor(availableHeight / totalBubbleSize);
 
