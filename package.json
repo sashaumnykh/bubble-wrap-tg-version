@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng build --configuration production --base-href=/bubble-wrap/ && npx angular-cli-ghpages --dir=dist/bubble-wrap/browser --branch=gh-pages --repo=https://github.com/sashaumnykh/bubble-wrap.git --name=\"sashaumnykh\" --email=\"you@example.com\""  
   },
   "private": true,
   "dependencies": {
