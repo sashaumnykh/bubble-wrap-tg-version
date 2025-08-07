@@ -14,7 +14,18 @@
 </div>
 
 <div *ngIf="areAllPopped" style="display: flex;
-justify-content: center;
-align-items: center;">
-    <img src="assets/img/again.jpg" (click)="playAgain()" matTooltip="Click to play again"/>
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;">
+    <div *ngIf="killerBubblePressed" class="killer-message">
+      💥 Это была КИЛЛЕР-ПУПЫРКА!<br>
+      Ты проиграл… но мем тебя утешит
+    </div>
+
+    <div *ngIf="!killerBubblePressed" class="win-message">
+      💥 ты победил и избежал киллер-пупырку!<br>
+      Давай сначала
+    </div>
+
+    <img src="assets/img/again.jpg" (click)="playAgain()" matTooltip="Click to play again" style="cursor: pointer;"/>
 </div>

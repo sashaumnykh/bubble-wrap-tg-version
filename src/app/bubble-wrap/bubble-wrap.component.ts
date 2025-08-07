@@ -14,6 +14,7 @@ export class BubbleWrapComponent {
   listBubbles: BubbleObj[] = [];
   numberOfBubbles: number = 0;
   areAllPopped: boolean = false;
+  killerBubblePressed: boolean = false;
 
   bubbleSize: number = 60;
 
@@ -49,6 +50,7 @@ export class BubbleWrapComponent {
 
   pop(bubble: BubbleObj) {
     if (bubble.isKiller) {
+      this.killerBubblePressed = true;
       this.listBubbles.forEach(b => b.isPopped = true);
 
       setTimeout(() => {
@@ -62,7 +64,7 @@ export class BubbleWrapComponent {
     audio.load();
     audio.play();
     bubble.isPopped = true;
-    this.areAllPopped = this.listBubbles.every(b => b.isPopped);
+    this.areAllPopped = this.listBubbles.filter(b => !b.isKiller).every(b => b.isPopped);
 
     /*
     if (this.areAllPopped) {
@@ -72,6 +74,9 @@ export class BubbleWrapComponent {
   
   playAgain() {
     this.listBubbles = new Array(this.numberOfBubbles).fill(null).map(() => new BubbleObj());
+    let killerIndex = Math.floor(Math.random() * this.numberOfBubbles);
+    this.listBubbles[killerIndex].isKiller = true;
+    this.killerBubblePressed = false;
     this.areAllPopped = false;
   }
 }

@@ -18,3 +18,55 @@
   opacity: 0.4;
   transform: scale(1.2);
 }
+
+.killer-message {
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 1.4rem;
+  text-align: center;
+  color: #138f00; // тёмно-салатовый
+  border: 4px solid #adff2f; // ярко-салатовый
+  background-color: #f9fff3; // очень светлый фон, почти белый
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 90%;
+  border-radius: 16px;
+  animation: killer-pulse 0.8s infinite alternate;
+  box-shadow: 0 0 10px #adff2f;
+}
+
+@keyframes killer-pulse {
+  from {
+    transform: scale(1);
+    box-shadow: 0 0 10px #adff2f;
+  }
+  to {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px #7fff00;
+  }
+}
+
+.win-message {
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 1.4rem;
+  text-align: center;
+  color: #8f005b;
+  border: 4px solid #ff2f9a;
+  background-color: #fff3fa;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 90%;
+  border-radius: 16px;
+  animation: win-pulse 0.8s infinite alternate;
+  box-shadow: 0 0 10px #ff2f97;
+}
+
+@keyframes win-pulse {
+  from {
+    transform: scale(1);
+    box-shadow: 0 0 10px #ff2fa1;
+  }
+  to {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px #ff0084;
+  }
+}
