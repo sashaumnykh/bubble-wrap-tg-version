@@ -7,6 +7,7 @@
   <img
     *ngFor="let bubble of listBubbles"
     [src]="bubble.isPopped ? 'assets/img/popped.png' : 'assets/img/bubble.png'"
+    [ngStyle]="{ left: bubble.x + 'px', top: bubble.y + 'px' }"
     (click)="!bubble.isPopped && pop(bubble)"
     [class.popped]="bubble.isPopped"
     class="bubble"

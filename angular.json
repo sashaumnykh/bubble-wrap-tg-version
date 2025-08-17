@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "bubble-wrap": {
+    "bubble-wrap-tg-version": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "baseHref": "/bubble-wrap/",
+            "baseHref": "/bubble-wrap-tg-version/",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
@@ -70,10 +70,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "bubble-wrap:build:production"
+              "buildTarget": "bubble-wrap-tg-version:build:production"
             },
             "development": {
-              "buildTarget": "bubble-wrap:build:development"
+              "buildTarget": "bubble-wrap-tg-version:build:development"
             }
           },
           "defaultConfiguration": "development"

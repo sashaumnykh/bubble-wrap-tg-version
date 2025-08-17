@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { BubbleObj } from '../models/bubbleObj copy';
+import { BubbleObj } from '../models/bubbleObj';
 
 @Component({
   selector: 'app-bubble-wrap',
@@ -32,20 +32,41 @@ export class BubbleWrapComponent {
     const totalBubbleSize = this.bubbleSize + gap;
 
     const containerEl = this.containerRef.nativeElement;
-    const { width, height } = containerEl.getBoundingClientRect();
 
-    debugger;
-    const safeOffset = 8;
-    const availableHeight = height - safeOffset;
-    const cols = Math.floor(width / totalBubbleSize);
-    const rows = Math.floor(availableHeight / totalBubbleSize);
-
-    this.columns = cols;
-    this.numberOfBubbles = cols * rows;
+    this.numberOfBubbles = 60;
 
     this.listBubbles = new Array(this.numberOfBubbles).fill(null).map(() => new BubbleObj());
     let killerIndex = Math.floor(Math.random() * this.numberOfBubbles);
     this.listBubbles[killerIndex].isKiller = true;
+
+    this.arrangeBubbles();
+  }
+
+  arrangeBubbles() {
+    const container = this.containerRef.nativeElement;
+    const gap = 4;
+    const totalBubbleSize = this.bubbleSize + gap;
+
+    const width = container.offsetWidth;
+    const height = container.offsetHeight;
+
+    const safeOffset = 8;
+    const availableHeight = height - safeOffset;
+
+    this.columns = Math.floor(width / totalBubbleSize);
+    const rows = Math.ceil(this.listBubbles.length / this.columns);
+
+    // Теперь можно распределить пупырки по сетке
+    let index = 0;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < this.columns; c++) {
+        if (index >= this.listBubbles.length) break;
+        const bubble = this.listBubbles[index];
+        bubble.x = c * totalBubbleSize;
+        bubble.y = r * totalBubbleSize;
+        index++;
+      }
+    }
   }
 
   pop(bubble: BubbleObj) {
